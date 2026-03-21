@@ -1,0 +1,314 @@
+:root {
+    --bg-color: #0d0d0d;
+    --accent-color: #aa00ff;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --font-heading: 'UnifrakturMaguntia', cursive;
+    --font-body: 'Outfit', sans-serif;
+    
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(20, 20, 20, 0.4);
+    --glass-border: rgba(170, 0, 255, 0.2);
+    --glass-hover-border: rgba(170, 0, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+::selection {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+/* --- Background Effects --- */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: #000;
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(170, 0, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(170, 0, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.6;
+}
+
+/* Organic blobs for background glow */
+.blob {
+    position: absolute;
+    filter: blur(90px);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: drift 25s infinite ease-in-out alternate;
+    transition: transform 0.2s ease-out;
+}
+
+.blob-1 {
+    width: 450px;
+    height: 450px;
+    background: var(--accent-color);
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: #400080;
+    bottom: -150px;
+    right: -100px;
+    animation-duration: 30s;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 300px;
+    height: 300px;
+    background: #2a0044;
+    top: 40%;
+    left: 40%;
+    animation-duration: 20s;
+    animation-delay: -10s;
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { transform: translate(100px, 150px) scale(1.1) rotate(45deg); }
+}
+
+/* --- Layout --- */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    z-index: 1;
+}
+
+/* --- Glassmorphism Panels --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
+}
+
+.glass-panel:hover {
+    border-color: var(--glass-hover-border);
+    transform: translateY(-8px);
+}
+
+/* --- Animations --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Hero Section --- */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.artist-name {
+    font-family: var(--font-heading);
+    font-size: 7rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px rgba(170, 0, 255, 0.5), 0 0 40px rgba(170, 0, 255, 0.3);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+    animation: neonPulse 4s infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% { 
+        text-shadow: 0 0 20px rgba(170, 0, 255, 0.5); 
+        color: rgba(170, 0, 255, 0.9);
+    }
+    100% { 
+        text-shadow: 0 0 30px rgba(170, 0, 255, 0.8), 0 0 60px rgba(170, 0, 255, 0.4), 0 0 100px rgba(170, 0, 255, 0.2); 
+        color: #fff;
+    }
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* --- Typography & Elements --- */
+.section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    color: var(--text-primary);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.glass-panel:hover .section-title::after {
+    width: 100%;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* --- Music Section --- */
+.soundcloud-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(170,0,255,0.1);
+}
+
+/* --- About Section --- */
+.about-section {
+    text-align: center;
+}
+
+.bio-text {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn {
+    background: var(--accent-color);
+    color: #fff;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 20px rgba(170, 0, 255, 0.4);
+}
+
+.btn:hover {
+    background: #c333ff;
+    border-color: #c333ff;
+    box-shadow: 0 0 30px rgba(170, 0, 255, 0.8);
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-primary);
+    box-shadow: none;
+}
+
+/* --- Footer --- */
+.glass-panel-footer {
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--glass-border);
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .artist-name { 
+        font-size: 4.5rem; 
+    }
+    .glass-panel { 
+        padding: 2rem 1.5rem; 
+    }
+    .container {
+        padding: 2rem 1rem;
+    }
+    .social-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .btn {
+        width: 100%;
+    }
+}
